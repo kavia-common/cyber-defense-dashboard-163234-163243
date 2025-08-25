@@ -1,0 +1,4 @@
+{
+    "command": "npm run build",
+    "working_directory": "/home/kavia/workspace/code-generation/cyber-defense-dashboard-163234-163243/cyber_defense_dashboard_frontend"
+}
