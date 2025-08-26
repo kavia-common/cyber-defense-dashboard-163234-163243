@@ -6,7 +6,7 @@ export default function Settings() {
   const { isDark, toggle } = useTheme()
   const { user } = useAuth()
   return (
-    <div className="space-y-4">
+    <div className="section">
       <section className="card">
         <div className="card-header">
           <h2 className="card-title">Preferences</h2>
@@ -20,8 +20,8 @@ export default function Settings() {
             <span className="font-medium">{user?.role}</span>)
           </p>
           <p className="text-gray-600 dark:text-gray-300">
-            Future settings: data refresh rate, alert thresholds, saved filters, notification
-            preferences, and dashboard layouts.
+            Future settings: refresh rate, alert thresholds, saved filters, notifications, and layout
+            presets.
           </p>
         </div>
       </section>

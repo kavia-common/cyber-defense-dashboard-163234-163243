@@ -32,7 +32,7 @@ export default function ActivityLog() {
           Export CSV
         </button>
       </div>
-      <div className="max-h-96 overflow-auto">
+      <div className="max-h-96 overflow-auto rounded-lg">
         <table className="table" role="table" aria-label="Activity log">
           <thead>
             <tr>
@@ -47,13 +47,19 @@ export default function ActivityLog() {
                 <td className="whitespace-nowrap text-xs text-gray-500 dark:text-gray-400">
                   {dayjs(a.timestamp).format('YYYY-MM-DD HH:mm:ss')}
                 </td>
-                <td className="font-medium">{a.type}</td>
-                <td>{a.detail}</td>
+                <td className="font-medium">
+                  <span className="badge badge-neutral">{a.type}</span>
+                </td>
+                <td className="max-w-[0]">
+                  <p className="truncate" title={a.detail}>
+                    {a.detail}
+                  </p>
+                </td>
               </tr>
             ))}
             {activity.length === 0 && (
               <tr>
-                <td colSpan={3} className="py-4 text-center text-sm text-gray-500">
+                <td colSpan={3} className="py-6 text-center text-sm text-gray-500 dark:text-gray-400">
                   No activity yet
                 </td>
               </tr>

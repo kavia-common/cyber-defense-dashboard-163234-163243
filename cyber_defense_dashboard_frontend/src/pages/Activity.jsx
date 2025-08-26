@@ -5,16 +5,16 @@ import { useDashboardStore } from '../store/useDashboardStore.js'
 export default function Activity() {
   const clearAll = useDashboardStore((s) => s.clearAll)
   return (
-    <div className="space-y-4">
+    <div className="section">
       <div className="card">
         <div className="card-header">
           <h2 className="card-title">Controls</h2>
-          <button className="btn h-9" onClick={clearAll}>
+          <button className="btn-danger h-9" onClick={clearAll}>
             Clear Alerts & Activity
           </button>
         </div>
         <p className="text-sm text-gray-600 dark:text-gray-300">
-          Use controls to manage the activity feed. Export from the table header.
+          Manage the activity feed. Use Export CSV in the table header to download logs.
         </p>
       </div>
       <ActivityLog />

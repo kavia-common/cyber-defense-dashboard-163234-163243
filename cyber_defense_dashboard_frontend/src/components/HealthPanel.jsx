@@ -36,10 +36,21 @@ export default function HealthPanel() {
         <Metric label="CPU Usage" value={health.cpu} unit="%" />
         <Metric label="Memory Usage" value={health.memory} unit="%" />
         <Metric label="Disk Usage" value={health.disk} unit="%" />
-        <div className="rounded-md bg-gray-50 p-4 dark:bg-gray-700/50">
+        <div className="rounded-lg bg-gray-50 p-4 dark:bg-gray-800/60">
           <div className="text-sm text-gray-600 dark:text-gray-300">Endpoints</div>
           <div className="mt-1 text-2xl font-semibold">
             {health.endpointsOnline} / {health.endpointsTotal}
+          </div>
+          <div className="mt-2 h-2 w-full rounded bg-gray-200 dark:bg-gray-700">
+            <div
+              className="h-2 rounded bg-brand-600"
+              style={{ width: `${Math.round((health.endpointsOnline / health.endpointsTotal) * 100)}%` }}
+              role="progressbar"
+              aria-valuenow={Math.round((health.endpointsOnline / health.endpointsTotal) * 100)}
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-label="Endpoints online"
+            />
           </div>
           <div className="mt-1 text-xs text-gray-500 dark:text-gray-400">
             {Math.round((health.endpointsOnline / health.endpointsTotal) * 100)}% online
@@ -53,8 +64,10 @@ export default function HealthPanel() {
 function Metric({ label, value, unit }) {
   const color =
     value >= 85 ? 'text-red-600' : value >= 70 ? 'text-yellow-600' : 'text-green-600'
+  const bar =
+    value >= 85 ? 'bg-red-600' : value >= 70 ? 'bg-yellow-500' : 'bg-green-600'
   return (
-    <div className="rounded-md bg-gray-50 p-4 dark:bg-gray-700/50">
+    <div className="rounded-lg bg-gray-50 p-4 dark:bg-gray-800/60">
       <div className="text-sm text-gray-600 dark:text-gray-300">{label}</div>
       <div className={`mt-1 text-2xl font-semibold ${color}`}>
         {value}
@@ -62,7 +75,7 @@ function Metric({ label, value, unit }) {
       </div>
       <div className="mt-2 h-2 w-full rounded bg-gray-200 dark:bg-gray-700">
         <div
-          className={`h-2 rounded ${color.replace('text-', 'bg-')}`}
+          className={`h-2 rounded ${bar}`}
           style={{ width: `${value}%` }}
           role="progressbar"
           aria-valuenow={value}

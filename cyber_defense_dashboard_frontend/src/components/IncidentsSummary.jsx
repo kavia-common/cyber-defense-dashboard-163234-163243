@@ -34,14 +34,18 @@ export default function IncidentsSummary() {
               {incidents.top.map((i) => (
                 <tr key={i.id}>
                   <td className="font-medium">{i.title}</td>
-                  <td>{i.severity}</td>
+                  <td>
+                    <span className="badge badge-warning">{i.severity}</span>
+                  </td>
                   <td>{i.count}</td>
-                  <td>{dayjs(i.lastSeen).fromNow?.() || dayjs(i.lastSeen).format('YYYY-MM-DD HH:mm')}</td>
+                  <td>
+                    {dayjs(i.lastSeen).fromNow?.() || dayjs(i.lastSeen).format('YYYY-MM-DD HH:mm')}
+                  </td>
                 </tr>
               ))}
               {incidents.top.length === 0 && (
                 <tr>
-                  <td colSpan={4} className="py-4 text-center text-sm text-gray-500">
+                  <td colSpan={4} className="py-4 text-center text-sm text-gray-500 dark:text-gray-400">
                     No incidents to display
                   </td>
                 </tr>
@@ -52,19 +56,25 @@ export default function IncidentsSummary() {
         <div>
           <h3 className="mb-2 text-sm font-semibold">Trending Attacks</h3>
           <ul className="space-y-2" role="list" aria-label="Trending attacks">
-            {incidents.trending.map((t) => (
-              <li key={t.id} className="flex items-center justify-between rounded-md bg-gray-50 p-3 dark:bg-gray-700/50">
-                <span className="font-medium">{t.name}</span>
-                <span
-                  className={`text-sm ${parseFloat(t.delta) >= 0 ? 'text-green-600' : 'text-red-600'}`}
-                  aria-label={`${t.delta}% change`}
+            {incidents.trending.map((t) => {
+              const up = parseFloat(t.delta) >= 0
+              return (
+                <li
+                  key={t.id}
+                  className="flex items-center justify-between rounded-lg bg-gray-50 px-3 py-2 dark:bg-gray-800/60"
                 >
-                  {parseFloat(t.delta) >= 0 ? '▲' : '▼'} {t.delta}%
-                </span>
-              </li>
-            ))}
+                  <span className="font-medium">{t.name}</span>
+                  <span
+                    className={`text-sm ${up ? 'text-green-600' : 'text-red-600'}`}
+                    aria-label={`${t.delta}% change`}
+                  >
+                    {up ? '▲' : '▼'} {t.delta}%
+                  </span>
+                </li>
+              )
+            })}
             {incidents.trending.length === 0 && (
-              <li className="text-sm text-gray-500">No trending data</li>
+              <li className="text-sm text-gray-500 dark:text-gray-400">No trending data</li>
             )}
           </ul>
         </div>

@@ -9,19 +9,19 @@ export default function Header() {
   const { isAuthenticated, user, logout } = useAuth()
 
   return (
-    <header className="border-b border-gray-200 bg-white/70 backdrop-blur dark:border-gray-800 dark:bg-gray-900/70">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
-        <Link to="/" className="flex items-center gap-2">
-          <span className="inline-flex h-8 w-8 items-center justify-center rounded bg-brand-600 font-bold text-white">
+    <header className="sticky top-0 z-40 border-b border-gray-200/70 bg-white/80 backdrop-blur-md dark:border-gray-800/70 dark:bg-gray-900/70">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
+        <Link to="/" className="group flex items-center gap-2">
+          <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-brand-700 font-bold text-white ring-1 ring-brand-600/30 group-hover:bg-brand-800">
             CD
           </span>
           <span className="sr-only">Cyber Defense</span>
-          <span className="text-sm font-semibold text-gray-700 dark:text-gray-200">
+          <span className="text-sm font-semibold leading-none text-gray-800 dark:text-gray-100">
             Cyber Defense Dashboard
           </span>
         </Link>
 
-        <nav aria-label="Global" className="hidden gap-6 md:flex">
+        <nav aria-label="Global" className="hidden items-center gap-6 md:flex">
           <NavItem to="/" label="Dashboard" />
           <NavItem to="/incidents" label="Incidents" />
           <NavItem to="/activity" label="Activity" />
@@ -32,11 +32,11 @@ export default function Header() {
           <button
             type="button"
             onClick={toggle}
-            className="btn-secondary h-9 px-2"
+            className="btn-ghost h-9 px-2"
             aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-            title="Toggle theme"
+            title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
           >
-            {isDark ? '🌙' : '☀️'}
+            <span aria-hidden="true">{isDark ? '🌙' : '☀️'}</span>
           </button>
           {isAuthenticated ? (
             <div className="flex items-center gap-2">
@@ -65,7 +65,7 @@ function NavItem({ to, label }) {
       className={({ isActive }) =>
         clsx(
           'text-sm font-medium text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-300 dark:hover:text-white',
-          isActive && 'text-gray-900 dark:text-white'
+          isActive && 'text-gray-900 dark:text-white underline decoration-brand-500/50 underline-offset-8'
         )
       }
       aria-label={label}

@@ -36,16 +36,19 @@ export default function AlertStream() {
           Real-time Alerts
         </h2>
         <div className="flex items-center gap-2">
-          <input
-            aria-label="Search alerts"
-            className="input h-9 w-48"
-            placeholder="Search..."
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-          />
+          <div className="input-icon">
+            <span className="icon">🔎</span>
+            <input
+              aria-label="Search alerts"
+              className="input h-9 w-48"
+              placeholder="Search alerts..."
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            />
+          </div>
           <select
             aria-label="Filter severity"
-            className="input h-9 w-36"
+            className="input h-9 w-40"
             value={severity}
             onChange={(e) => setSeverity(e.target.value)}
           >
@@ -62,9 +65,12 @@ export default function AlertStream() {
           <li className="text-sm text-gray-500 dark:text-gray-400">No alerts</li>
         )}
         {filtered.map((a) => (
-          <li key={a.id} className="rounded-md border border-gray-200 p-3 dark:border-gray-700">
-            <div className="flex items-center justify-between gap-2">
-              <div className="flex items-center gap-2">
+          <li
+            key={a.id}
+            className="rounded-lg border border-gray-200/70 bg-white/60 p-3 shadow-sm transition hover:shadow-md dark:border-gray-800/70 dark:bg-gray-900/40"
+          >
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <div className="flex flex-wrap items-center gap-2">
                 <span className={clsx('badge', severityStyles[a.severity])}>
                   {a.severity.toUpperCase()}
                 </span>
@@ -75,21 +81,27 @@ export default function AlertStream() {
               </div>
               <div className="flex items-center gap-2">
                 {!a.acknowledged && (
-                  <button className="btn-secondary h-8 px-2 text-xs" onClick={() => acknowledgeAlert(a.id)}>
+                  <button
+                    className="btn-success h-8 px-2 text-xs"
+                    onClick={() => acknowledgeAlert(a.id)}
+                  >
                     Acknowledge
                   </button>
                 )}
                 {!a.muted && (
-                  <button className="btn-secondary h-8 px-2 text-xs" onClick={() => muteAlert(a.id)}>
+                  <button
+                    className="btn-warning h-8 px-2 text-xs"
+                    onClick={() => muteAlert(a.id)}
+                  >
                     Mute
                   </button>
                 )}
-                <button className="btn h-8 px-2 text-xs" onClick={() => clearAlert(a.id)}>
+                <button className="btn-danger h-8 px-2 text-xs" onClick={() => clearAlert(a.id)}>
                   Clear
                 </button>
               </div>
             </div>
-            <p className="mt-2 text-sm">{a.message}</p>
+            <p className="mt-2 text-sm leading-relaxed">{a.message}</p>
           </li>
         ))}
       </ul>
