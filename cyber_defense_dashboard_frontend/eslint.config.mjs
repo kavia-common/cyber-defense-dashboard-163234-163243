@@ -29,14 +29,13 @@ export default [
     plugins: {
       "@typescript-eslint": tseslint,
     },
-    rules: {
-      // Your custom rules here
-    },
+    rules: {},
   },
   {
     languageOptions: {
       globals: {
         document: "readonly",
+        window: "readonly",
       },
     },
   },
