@@ -8,6 +8,7 @@ import Incidents from './pages/Incidents.jsx'
 import Activity from './pages/Activity.jsx'
 import Settings from './pages/Settings.jsx'
 import Login from './pages/Login.jsx'
+import LogAnalyzer from './pages/LogAnalyzer.jsx'
 
 // PUBLIC_INTERFACE
 export default function App() {
@@ -46,6 +47,14 @@ export default function App() {
               element={
                 <Protected>
                   <Settings />
+                </Protected>
+              }
+            />
+            <Route
+              path="/log-analyzer"
+              element={
+                <Protected>
+                  <LogAnalyzer />
                 </Protected>
               }
             />

@@ -7,6 +7,7 @@ const links = [
   { to: '/', label: 'Overview' },
   { to: '/incidents', label: 'Incidents' },
   { to: '/activity', label: 'Activity Log' },
+  { to: '/log-analyzer', label: 'Log Analyzer' },
   { to: '/settings', label: 'Settings' },
 ]
 

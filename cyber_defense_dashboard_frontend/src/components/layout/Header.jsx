@@ -26,6 +26,7 @@ export default function Header() {
           <NavItem to="/incidents" label="Incidents" />
           <NavItem to="/activity" label="Activity" />
           <NavItem to="/settings" label="Settings" />
+          <NavItem to="/log-analyzer" label="Log Analyzer" />
         </nav>
 
         <div className="flex items-center gap-2">
