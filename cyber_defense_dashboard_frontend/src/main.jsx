@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 import App from './App'
 import './style.css'
 import { useAppStore } from './store/useAppStore'
+import ErrorBoundary from './components/ErrorBoundary'
 
 // Apply persisted theme class to <html>
 function ThemeInitializer() {
@@ -20,7 +21,9 @@ createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
       <ThemeInitializer />
-      <App />
+      <ErrorBoundary>
+        <App />
+      </ErrorBoundary>
     </BrowserRouter>
   </React.StrictMode>
 )

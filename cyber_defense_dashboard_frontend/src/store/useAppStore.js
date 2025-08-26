@@ -51,6 +51,18 @@ function generateMetrics(prev = null) {
   }
 }
 
+function safeUUID() {
+  // Safe UUID helper that works even if Web Crypto is unavailable
+  try {
+    if (globalThis.crypto && typeof globalThis.crypto.randomUUID === 'function') {
+      return globalThis.crypto.randomUUID()
+    }
+  } catch {
+    // ignore and fall back
+  }
+  return Math.random().toString(36).slice(2) + Date.now().toString(36)
+}
+
 function generateActivity() {
   const actions = [
     'User login',
@@ -62,7 +74,7 @@ function generateActivity() {
   ]
   const users = ['analyst_a', 'analyst_b', 'system', 'admin']
   return {
-    id: crypto.randomUUID(),
+    id: safeUUID(),
     time: new Date().toISOString(),
     user: randChoice(users),
     action: randChoice(actions),
