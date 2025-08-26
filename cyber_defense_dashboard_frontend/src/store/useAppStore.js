@@ -176,7 +176,16 @@ export const useAppStore = create(
       },
 
       // PUBLIC_INTERFACE
-      formatTime: (iso) => format(new Date(iso), 'PP pp'),
+      formatTime: (iso) => {
+        try {
+          if (!iso) return 'N/A'
+          const d = new Date(iso)
+          if (isNaN(d.getTime())) return 'N/A'
+          return format(d, 'PP pp')
+        } catch {
+          return 'N/A'
+        }
+      },
     }),
     {
       name: 'cyber-defense-dashboard',

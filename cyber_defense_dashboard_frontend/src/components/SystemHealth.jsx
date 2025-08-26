@@ -34,7 +34,8 @@ function Meter({ label, value, suffix = '%', color = 'primary' }) {
 export default function SystemHealth() {
   /** Shows simulated system metrics */
   const metrics = useAppStore((s) => s.metrics)
-  const updatedAt = useAppStore((s) => s.metrics.updatedAt)
+  // Avoid nested selector access that can break if metrics is briefly undefined
+  const updatedAt = useAppStore((s) => (s.metrics && s.metrics.updatedAt) || null)
   const formatTime = useAppStore((s) => s.formatTime)
 
   const cpuColor = metrics.cpu > 80 ? 'danger' : metrics.cpu > 65 ? 'warning' : 'primary'
@@ -45,7 +46,9 @@ export default function SystemHealth() {
     <div className="card h-full">
       <div className="card-header">
         <h3 className="card-title">System Health</h3>
-        <span className="text-xs text-gray-500">Updated {formatTime(updatedAt)}</span>
+        <span className="text-xs text-gray-500">
+          Updated {updatedAt ? formatTime(updatedAt) : '—'}
+        </span>
       </div>
       <div className="card-content space-y-4">
         <Meter label="CPU" value={metrics.cpu} color={cpuColor} />
